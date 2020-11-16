@@ -1,3 +1,11 @@
+"""#####################################################################################################################
+Contains skeleton code for a DecisionTree class. The constructor expects a dataset to be learned.
+Some of the methods are written for you. Do not change the names of any of the predefined variables or interfaces,
+they will be examined in the unit test code and can cause your execution to fail.
+The class contains methods to predict the class of examples, estimation entropy, estimate χ 2 statistics,
+etc. Read through the code to determine what is provided and what you need to write.
+The bulk of your assignment is modifying this module.
+#####################################################################################################################"""
 
 from collections import namedtuple
 

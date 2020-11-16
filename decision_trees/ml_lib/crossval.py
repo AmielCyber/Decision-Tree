@@ -1,3 +1,8 @@
+"""#####################################################################################################################
+Contains a function for performing k-fold cross validation. Make sure that you understand this code,
+cross-validation is an important concept for evaluating machine learning algorithms.
+#####################################################################################################################"""
+
 from copy import copy
 import random
 
