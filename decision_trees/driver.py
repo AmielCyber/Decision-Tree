@@ -21,7 +21,17 @@ def main():
     Machine learning with decision trees.
     Runs cross validation on data sets and reports results/trees
     """
-    raise NotImplementedError
+    mushroomData = DataSet(target=0, name='mushrooms')
+    zooData = DataSet(name='zoo', exclude=[0])
+
+    zooExamples = zooData.examples
+    zooInputs = zooData.inputs
+    #DecisionTreeLearner(zooData)
+
+    print(mushroomData)
+    print(zooData)
+    print(zooExamples)
+    print(zooInputs)
 
 if __name__ == '__main__':
     main()
