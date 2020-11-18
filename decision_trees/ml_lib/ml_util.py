@@ -5,8 +5,9 @@ machine learning utility functions
 # Standard modules
 import random
 import collections
+from collections import defaultdict ########################
 import numpy as np
-from statistics import mean
+from statistics import mean, stdev ############################
 
 # Contributed
 from ml_lib.utils import open_data, num_or_str
