@@ -82,14 +82,12 @@ class DecisionTreeLearner:
             a = self.choose_attribute(attrs, examples)
             t = DecisionFork(a, self.count_targets(examples), self.dataset.attr_names[a])
 
-
-
-
-
-
-
-
-        raise NotImplementedError
+            splitValueList = self.split_by(a, examples)
+            for tupleValue in splitValueList:
+                v, vexamples = tupleValue
+                subtree = self.decision_tree_learning(vexamples, attrs.remove(a), parent_examples=examples)
+                t.add(v, subtree)
+            return t
 
     def plurality_value(self, examples):
         """
