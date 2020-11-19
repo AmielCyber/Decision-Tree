@@ -72,7 +72,7 @@ class DecisionFork:
             # Predict at this node.
             if self.default_child is None:
                 # Nothing specified, use pluarality value
-                selectged_class =  best_index(self.distribution)
+                selected_class = best_index(self.distribution)
                 prediction = selected_class
             else:
                 # User specified their own method for deciding the class

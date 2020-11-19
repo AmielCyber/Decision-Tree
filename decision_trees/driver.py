@@ -1,7 +1,9 @@
 """#####################################################################################################################
 Entry point into your program. You will be classifying the mushroom data set and the zoo data set, both of which are
 provided to you. Use the provided cross validation class to conduct two 10-fold crossvalidation decision tree
-experiments. One should be conducted without pruning and the other with pruned trees at a p-value of 0.05.
+experiments.
+
+One should be conducted without pruning and the other with pruned trees at a p-value of 0.05.
 Two miniscule datasets that correspond to things we did in class are available as well: restaurant, and tiny_animal_set.
 You do not need to test these in your program, but you may find them very useful for debugging as you know the correct
 behavior of many of the operations you need to implement as we discussed these in class.
@@ -35,9 +37,16 @@ def main():
     Machine learning with decision trees.
     Runs cross validation on data sets and reports results/trees
     """
-    mushroomData = DataSet(target=0, name='mushrooms')
-    zooData = DataSet(name='zoo', exclude=[0])
+    # Create data sets
+    mushroomData = DataSet(target=0, attr_names=True, name='mushrooms')
+    zooData = DataSet(name='zoo', attr_names=True, exclude=[0])
 
+    # Call cross validation with the DecisionTreeLearner class
+    cross_validation(DecisionTreeLearner, mushroomData)
+    cross_validation(DecisionTreeLearner, zooData)
+
+
+    ##################################################################
     zooExamples = zooData.examples
     zooInputs = zooData.inputs
     #DecisionTreeLearner(zooData)

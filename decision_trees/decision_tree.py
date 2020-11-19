@@ -71,6 +71,23 @@ class DecisionTreeLearner:
 
         # Hints:  See pseudocode from class and leverage classes
         # DecisionFork and DecisionLeaf
+        if examples is None:
+            return self.plurality_value(parent_examples)
+        elif self.all_same_class(examples):
+            target = self.dataset.target
+            return examples[0][target]          # check
+        elif attrs is None:
+            return self.plurality_value(examples)
+        else:
+            a = self.choose_attribute(attrs, examples)
+            t = DecisionFork(a, self.count_targets(examples), self.dataset.attr_names[a])
+
+
+
+
+
+
+
 
         raise NotImplementedError
 
@@ -114,6 +131,7 @@ class DecisionTreeLearner:
 
     def choose_attribute(self, attrs, examples):
         """Choose the attribute with the highest information gain."""
+
 
         # Returns the attribute index
         raise NotImplementedError
