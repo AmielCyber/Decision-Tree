@@ -6,7 +6,7 @@ The class contains methods to predict the class of examples, estimation entropy,
 etc. Read through the code to determine what is provided and what you need to write.
 The bulk of your assignment is modifying this module.
 #####################################################################################################################"""
-
+import math
 from collections import namedtuple
 
 import numpy as np
@@ -129,15 +129,22 @@ class DecisionTreeLearner:
 
     def choose_attribute(self, attrs, examples):
         """Choose the attribute with the highest information gain."""
+        maxAttr = 0
+        maxGain = -math.inf
 
-
+        for attr in attrs:
+            attrGain = self.information_gain(attr, examples)
+            if attrGain > maxGain:
+                maxGain = attrGain
+                maxAttr = attr
+        return maxAttr
         # Returns the attribute index
-        raise NotImplementedError
+        #raise NotImplementedError
 
     def information_gain(self, attr, examples):
         """Return the expected reduction in entropy for examples from splitting by attr."""
-
-        raise NotImplementedError
+        return 0.0
+        #raise NotImplementedError
 
     def split_by(self, attr, examples):
         """split_by(attr, examples)
@@ -161,6 +168,13 @@ class DecisionTreeLearner:
         2 examples of class 1, and 0 examples of class 2:
         information_content((3, 2, 0)) returns ~ .971
         """
+        ###########NEED TO REVISIT#########################
+        p = class_counts[0]
+        n = class_counts[1]
+        q = (p / (p + n))
+
+        entropy = -(q * np.log2(q) + ((1-q) * np.log2(1-q)))
+        return entropy
 
         # Hints:
         #  Remember discrete values use log2 when computing probability
@@ -168,7 +182,7 @@ class DecisionTreeLearner:
         #  Python treats logarithms of 0 as a domain error, whereas numpy
         #    will compute them correctly.  Be careful.
 
-        raise NotImplementedError
+        #raise NotImplementedError
 
     def information_per_class(self, examples):
         """information_per_class(examples)
@@ -178,8 +192,11 @@ class DecisionTreeLearner:
         """
         # Hint:  list of classes can be obtained from
         # self.data.set.values[self.dataset.target]
+        #targetClasses = self.dataset.values[self.dataset.target]
+        class_count = self.count_targets(examples)
+        return self.information_content(class_count)
 
-        raise NotImplementedError
+        #raise NotImplementedError
 
     def prune(self, p_value):
         """Prune leaves of a tree when the hypothesis that the distribution
