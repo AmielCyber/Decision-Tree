@@ -71,23 +71,29 @@ class DecisionTreeLearner:
 
         # Hints:  See pseudocode from class and leverage classes
         # DecisionFork and DecisionLeaf
-        if examples is None:
-            return self.plurality_value(parent_examples)
+        if len(examples) == 0:
+            # If there are no more examples
+            return self.plurality_value(parent_examples)    # Picks whatever parent had the most value
         elif self.all_same_class(examples):
-            target = self.dataset.target
-            return examples[0][target]          # check
-        elif attrs is None:
+            # If all examples are from the same class then we are done
+            target = self.dataset.target    # Get target index
+            # Returns the class from the first example since all the remaining examples have the same class
+            return examples[0][target]
+        elif len(attrs) == 0:
+            # If there are no more questions to ask
             return self.plurality_value(examples)
         else:
-            a = self.choose_attribute(attrs, examples)
+            a = self.choose_attribute(attrs, examples)  # Choose the most important attribute based on info gained
+            # Create new tree rooted on the most important question such as: if a..?
             t = DecisionFork(a, self.count_targets(examples), self.dataset.attr_names[a])
 
-            splitValueList = self.split_by(a, examples)
-            for tupleValue in splitValueList:
-                v, vexamples = tupleValue
-                subtree = self.decision_tree_learning(vexamples, attrs.remove(a), parent_examples=examples)
-                t.add(v, subtree)
-            return t
+            # Get values associated with attribute a and its examples
+            valuesWithAList = self.split_by(a, examples)    # e.g. [(val_1,listOfExamplesWithVal_1),...]
+            for tupleValue in valuesWithAList:  # For each value and its examples associated with attribute a
+                v, vexamples = tupleValue       # value, value_examples
+                subtree = self.decision_tree_learning(vexamples, np.setdiff1d(attrs, [a]), parent_examples=examples)
+                t.add(v, subtree)   # Add a subtree to our tree with v as branch level
+            return t                # Return the current tree
 
     def plurality_value(self, examples):
         """
@@ -129,7 +135,7 @@ class DecisionTreeLearner:
 
     def choose_attribute(self, attrs, examples):
         """Choose the attribute with the highest information gain."""
-        maxAttr = 0
+        maxAttr = attrs[0]
         maxGain = -math.inf
 
         for attr in attrs:
