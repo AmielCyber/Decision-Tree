@@ -42,8 +42,8 @@ def main():
     zooData = DataSet(name='zoo', attr_names=True, exclude=[0])
 
     # Call cross validation with the DecisionTreeLearner class
-    cross_validation(DecisionTreeLearner, mushroomData)
-    cross_validation(DecisionTreeLearner, zooData)
+    mushroomResults = cross_validation(DecisionTreeLearner, mushroomData)
+    zooResults = cross_validation(DecisionTreeLearner, zooData)
 
 
     ##################################################################
