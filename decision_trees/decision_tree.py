@@ -149,7 +149,16 @@ class DecisionTreeLearner:
 
     def information_gain(self, attr, examples):
         """Return the expected reduction in entropy for examples from splitting by attr."""
-        return 0.0
+        #information gain is Gain = entropy - remainder
+        #only use information_per_class used in information_gain
+        #use split_by in remainder
+        #use information_per_class, split_by, information_content
+
+        list_of_class_counts = self.information_per_class(examples)
+        entropy = self.information_content(list_of_class_counts)
+
+        #how to get remainder?
+
         #raise NotImplementedError
 
     def split_by(self, attr, examples):
@@ -174,13 +183,15 @@ class DecisionTreeLearner:
         2 examples of class 1, and 0 examples of class 2:
         information_content((3, 2, 0)) returns ~ .971
         """
-        ###########NEED TO REVISIT#########################
-        p = class_counts[0]
-        n = class_counts[1]
-        q = (p / (p + n))
+        #information_content says to compute entropy [H(x)]
+        #normalize class_counts to get ratios/fractions for propability then use entropy equation to find summation
+        entropy = 0.0
+        probability = normalize(class_counts)
 
-        entropy = -(q * np.log2(q) + ((1-q) * np.log2(1-q)))
+        for ratio in probability: #looping through the probabilities from normalizing
+            entropy += -1 * ratio * np.log2(ratio)
         return entropy
+        #returning entropy [H(x)] as a float but maybe it should be a list because remainder needs to get every individual entropies
 
         # Hints:
         #  Remember discrete values use log2 when computing probability
@@ -199,8 +210,10 @@ class DecisionTreeLearner:
         # Hint:  list of classes can be obtained from
         # self.data.set.values[self.dataset.target]
         #targetClasses = self.dataset.values[self.dataset.target]
+        # only use information_per_class to get the list of target classes count
+
         class_count = self.count_targets(examples)
-        return self.information_content(class_count)
+        return class_count
 
         #raise NotImplementedError
 
@@ -219,7 +232,7 @@ class DecisionTreeLearner:
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
-        raise NotImplementedError
+        #raise NotImplementedError
 
     def chi_annotate(self, p_value):
         """chi_annotate(p_value)
