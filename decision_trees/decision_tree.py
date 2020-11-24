@@ -153,11 +153,19 @@ class DecisionTreeLearner:
         #only use information_per_class used in information_gain
         #use split_by in remainder
         #use information_per_class, split_by, information_content
+        entropy = 0.0
+        remainder = 0.0
 
-        list_of_class_counts = self.information_per_class(examples)
-        entropy = self.information_content(list_of_class_counts)
-
-        #how to get remainder?
+        list_of_class = self.information_per_class(examples)
+        entropy = self.information_content(list_of_class)
+        valuesWithAList = self.split_by(attr, examples)
+        for tupleValue in valuesWithAList: #going through list of attributes and getting examples based on attr
+            v, vexamples = tupleValue
+            list_of_remainder = self.information_per_class(vexamples) #getting new list of counts for remainder
+            entropyRemainder = self.information_content(list_of_remainder) #getting entropy of remainder
+            remainder = remainder + entropyRemainder #summing all remainders together
+        gain = entropy - remainder
+        return gain
 
         #raise NotImplementedError
 
@@ -188,8 +196,9 @@ class DecisionTreeLearner:
         entropy = 0.0
         probability = normalize(class_counts)
 
-        for ratio in probability: #looping through the probabilities from normalizing
-            entropy += -1 * ratio * np.log2(ratio)
+        for ratio in probability:  # looping through the probabilities from normalizing
+            sum = -1 * ratio * np.log2(ratio)
+            entropy = entropy + sum
         return entropy
         #returning entropy [H(x)] as a float but maybe it should be a list because remainder needs to get every individual entropies
 
@@ -276,9 +285,18 @@ class DecisionTreeLearner:
            that there is a significant difference between the fork and its
            children
         """
+        """ Define an acceptable level of error called a p-value
+            look up threshold from chi-squared inverse cdf at 1 - p-value
+            computer change for each leaf"""
 
         if not isinstance(fork, DecisionFork):
             raise ValueError("fork is not a DecisionFork")
+
+        #look up threshold from chi-squared inverse cdf at 1 - p-value
+        threshold_inverse_cdf = scipy.stats.chi2.ppf(1-p_value, self.dof)
+
+
+
 
         # Hint:  You need to extend the 2 case chi^2 test that we covered
         # in class to an n-case chi^2 test.  This part is straight forward.
@@ -288,7 +306,8 @@ class DecisionTreeLearner:
         # Don't forget, scipy has an inverse cdf for chi^2
         # scipy.stats.chi2.ppf
 
-        raise NotImplementedError
+
+        #raise NotImplementedError
 
     def __str__(self):
         """str - String representation of the tree"""
