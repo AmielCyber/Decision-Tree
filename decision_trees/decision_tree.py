@@ -72,19 +72,19 @@ class DecisionTreeLearner:
         if len(examples) == 0:
             # If there are no more examples create leaf with the most popular target based on parent examples
             popular_target = self.plurality_value(parent_examples)
-            leaf = DecisionLeaf(popular_target, 0, parent)              # Create leaf
+            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)              # Create leaf
             return leaf
         elif self.all_same_class(examples):
             # If all examples are from the same class then we are done, hence we will return the result in a leaf
             target = self.dataset.target  # Get target index
             # Returns the class from the first example since all the remaining examples have the same class
             result = examples[0][target]
-            leaf = DecisionLeaf(result, self.count_targets, parent)     # Create leaf
+            leaf = DecisionLeaf(result, self.count_targets(examples), parent)     # Create leaf
             return leaf
         elif len(attrs) == 0:
             # If there are no more questions to ask then pick the most popular target based on the examples passed
             popular_target = self.plurality_value(examples)
-            leaf = DecisionLeaf(popular_target, 0, parent)              # Create leaf
+            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)              # Create leaf
             return leaf
         else:
 

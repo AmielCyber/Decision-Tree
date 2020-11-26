@@ -45,6 +45,12 @@ def main():
     mushroomResults = cross_validation(DecisionTreeLearner, mushroomData)
     zooResults = cross_validation(DecisionTreeLearner, zooData)
 
+    mushroom_err = mushroomResults[0]
+    mushroom_model = mushroomResults[1]
+    print('err:', mushroom_err)
+    print('Model:', mushroom_model)
+    for tree in mushroom_model:
+        print(tree)
 
     ##################################################################
     zooExamples = zooData.examples
