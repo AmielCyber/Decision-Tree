@@ -38,8 +38,8 @@ def main():
     Runs cross validation on data sets and reports results/trees
     """
     # Create data sets
-    mushroomData = DataSet(target=0, attr_names=True, name='mushrooms')
-    zooData = DataSet(name='zoo', attr_names=True, exclude=[0])
+    mushroomData = DataSet(attr_names=True, target=0, name='mushrooms')
+    zooData = DataSet(attr_names=True, name='zoo', exclude=[0])
 
     # Call cross validation with the DecisionTreeLearner class
     mushroomResults = cross_validation(DecisionTreeLearner, mushroomData)

@@ -47,8 +47,6 @@ class DecisionTreeLearner:
 
         self.debug = debug
 
-
-
     def __str__(self):
         "str - Create a string representation of the tree"
         if self.tree is None:
@@ -73,27 +71,29 @@ class DecisionTreeLearner:
         # DecisionFork and DecisionLeaf
         if len(examples) == 0:
             # If there are no more examples
-            return self.plurality_value(parent_examples)    # Picks whatever parent had the most value
+            return self.plurality_value(parent_examples)  # Picks whatever parent had the most value
         elif self.all_same_class(examples):
             # If all examples are from the same class then we are done
-            target = self.dataset.target    # Get target index
+            target = self.dataset.target  # Get target index
             # Returns the class from the first example since all the remaining examples have the same class
-            return examples[0][target]
+            result = examples[0][target]
+            return DecisionLeaf(result, self.count_targets, parent)
         elif len(attrs) == 0:
             # If there are no more questions to ask
             return self.plurality_value(examples)
         else:
+
             a = self.choose_attribute(attrs, examples)  # Choose the most important attribute based on info gained
             # Create new tree rooted on the most important question such as: if a..?
-            t = DecisionFork(a, self.count_targets(examples), self.dataset.attr_names[a])
+            t = DecisionFork(a, self.count_targets(examples), self.dataset.attr_names[a], parent=parent)
 
             # Get values associated with attribute a and its examples
-            valuesWithAList = self.split_by(a, examples)    # e.g. [(val_1,listOfExamplesWithVal_1),...]
+            valuesWithAList = self.split_by(a, examples)  # e.g. [(val_1,listOfExamplesWithVal_1),...]
             for tupleValue in valuesWithAList:  # For each value and its examples associated with attribute a
-                v, vexamples = tupleValue       # value, value_examples
-                subtree = self.decision_tree_learning(vexamples, np.setdiff1d(attrs, [a]), parent_examples=examples)
-                t.add(v, subtree)   # Add a subtree to our tree with v as branch level
-            return t                # Return the current tree
+                v, vexamples = tupleValue  # value, value_examples
+                subtree = self.decision_tree_learning(vexamples, np.setdiff1d(attrs, [a]), t, examples)
+                t.add(v, subtree)  # Add a subtree to our tree with v as branch level
+            return t  # Return the current tree
 
     def plurality_value(self, examples):
         """
@@ -115,7 +115,7 @@ class DecisionTreeLearner:
         (self.dataset.values[self.dataset.target])
         """
 
-        tidx = self.dataset.target # index of target attribute
+        tidx = self.dataset.target  # index of target attribute
         target_values = self.dataset.values[tidx]  # Class labels across dataset
 
         # Count the examples associated with each target
@@ -126,7 +126,6 @@ class DecisionTreeLearner:
             counts[position] += 1
 
         return counts
-
 
     def all_same_class(self, examples):
         """Are all these examples in the same target class?"""
@@ -145,29 +144,29 @@ class DecisionTreeLearner:
                 maxAttr = attr
         return maxAttr
         # Returns the attribute index
-        #raise NotImplementedError
+        # raise NotImplementedError
 
     def information_gain(self, attr, examples):
         """Return the expected reduction in entropy for examples from splitting by attr."""
-        #information gain is Gain = entropy - remainder
-        #only use information_per_class used in information_gain
-        #use split_by in remainder
-        #use information_per_class, split_by, information_content
+        # information gain is Gain = entropy - remainder
+        # only use information_per_class used in information_gain
+        # use split_by in remainder
+        # use information_per_class, split_by, information_content
         entropy = 0.0
         remainder = 0.0
 
         list_of_class = self.information_per_class(examples)
         entropy = self.information_content(list_of_class)
         valuesWithAList = self.split_by(attr, examples)
-        for tupleValue in valuesWithAList: #going through list of attributes and getting examples based on attr
+        for tupleValue in valuesWithAList:  # going through list of attributes and getting examples based on attr
             v, vexamples = tupleValue
-            list_of_remainder = self.information_per_class(vexamples) #getting new list of counts for remainder
-            entropyRemainder = self.information_content(list_of_remainder) #getting entropy of remainder
-            remainder = remainder + entropyRemainder #summing all remainders together
+            list_of_remainder = self.information_per_class(vexamples)  # getting new list of counts for remainder
+            entropyRemainder = self.information_content(list_of_remainder)  # getting entropy of remainder
+            remainder = remainder + entropyRemainder  # summing all remainders together
         gain = entropy - remainder
         return gain
 
-        #raise NotImplementedError
+        # raise NotImplementedError
 
     def split_by(self, attr, examples):
         """split_by(attr, examples)
@@ -191,16 +190,16 @@ class DecisionTreeLearner:
         2 examples of class 1, and 0 examples of class 2:
         information_content((3, 2, 0)) returns ~ .971
         """
-        #information_content says to compute entropy [H(x)]
-        #normalize class_counts to get ratios/fractions for propability then use entropy equation to find summation
+        # information_content says to compute entropy [H(x)]
+        # normalize class_counts to get ratios/fractions for propability then use entropy equation to find summation
         entropy = 0.0
-        probability = normalize(class_counts)
+        probability = normalize(np.setdiff1d(class_counts, [0]))
 
         for ratio in probability:  # looping through the probabilities from normalizing
             sum = -1 * ratio * np.log2(ratio)
             entropy = entropy + sum
         return entropy
-        #returning entropy [H(x)] as a float but maybe it should be a list because remainder needs to get every individual entropies
+        # returning entropy [H(x)] as a float but maybe it should be a list because remainder needs to get every individual entropies
 
         # Hints:
         #  Remember discrete values use log2 when computing probability
@@ -208,7 +207,7 @@ class DecisionTreeLearner:
         #  Python treats logarithms of 0 as a domain error, whereas numpy
         #    will compute them correctly.  Be careful.
 
-        #raise NotImplementedError
+        # raise NotImplementedError
 
     def information_per_class(self, examples):
         """information_per_class(examples)
@@ -218,13 +217,13 @@ class DecisionTreeLearner:
         """
         # Hint:  list of classes can be obtained from
         # self.data.set.values[self.dataset.target]
-        #targetClasses = self.dataset.values[self.dataset.target]
+        # targetClasses = self.dataset.values[self.dataset.target]
         # only use information_per_class to get the list of target classes count
 
         class_count = self.count_targets(examples)
         return class_count
 
-        #raise NotImplementedError
+        # raise NotImplementedError
 
     def prune(self, p_value):
         """Prune leaves of a tree when the hypothesis that the distribution
@@ -241,7 +240,7 @@ class DecisionTreeLearner:
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
-        #raise NotImplementedError
+        # raise NotImplementedError
 
     def chi_annotate(self, p_value):
         """chi_annotate(p_value)
@@ -292,11 +291,8 @@ class DecisionTreeLearner:
         if not isinstance(fork, DecisionFork):
             raise ValueError("fork is not a DecisionFork")
 
-        #look up threshold from chi-squared inverse cdf at 1 - p-value
-        threshold_inverse_cdf = scipy.stats.chi2.ppf(1-p_value, self.dof)
-
-
-
+        # look up threshold from chi-squared inverse cdf at 1 - p-value
+        threshold_inverse_cdf = scipy.stats.chi2.ppf(1 - p_value, self.dof)
 
         # Hint:  You need to extend the 2 case chi^2 test that we covered
         # in class to an n-case chi^2 test.  This part is straight forward.
@@ -306,19 +302,8 @@ class DecisionTreeLearner:
         # Don't forget, scipy has an inverse cdf for chi^2
         # scipy.stats.chi2.ppf
 
-
-        #raise NotImplementedError
+        # raise NotImplementedError
 
     def __str__(self):
         """str - String representation of the tree"""
         return str(self.tree)
-
-
-
-
-
-
-
-
-
-

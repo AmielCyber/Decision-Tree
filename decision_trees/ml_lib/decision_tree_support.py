@@ -1,6 +1,7 @@
 """#####################################################################################################################
 Classes to handle branches in decision trees (the root of your decision tree should be an instance of DecisionFork)
 as well as leaf nodes of decision trees. These classes require several things at instantiation.
+
 For DecisionFork’s you will need the index of the attribute on which the fork depends (what question was asked),
 a tuple or list with the counts of each class that were active when this node of the tree was generated,
 the attribute name (as opposed to a number) to aid your understanding when the tree is displayed, and the parent node.
