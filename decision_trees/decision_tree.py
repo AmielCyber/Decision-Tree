@@ -70,17 +70,22 @@ class DecisionTreeLearner:
         # Hints:  See pseudocode from class and leverage classes
         # DecisionFork and DecisionLeaf
         if len(examples) == 0:
-            # If there are no more examples
-            return self.plurality_value(parent_examples)  # Picks whatever parent had the most value
+            # If there are no more examples create leaf with the most popular target based on parent examples
+            popular_target = self.plurality_value(parent_examples)
+            leaf = DecisionLeaf(popular_target, 0, parent)              # Create leaf
+            return leaf
         elif self.all_same_class(examples):
-            # If all examples are from the same class then we are done
+            # If all examples are from the same class then we are done, hence we will return the result in a leaf
             target = self.dataset.target  # Get target index
             # Returns the class from the first example since all the remaining examples have the same class
             result = examples[0][target]
-            return DecisionLeaf(result, self.count_targets, parent)
+            leaf = DecisionLeaf(result, self.count_targets, parent)     # Create leaf
+            return leaf
         elif len(attrs) == 0:
-            # If there are no more questions to ask
-            return self.plurality_value(examples)
+            # If there are no more questions to ask then pick the most popular target based on the examples passed
+            popular_target = self.plurality_value(examples)
+            leaf = DecisionLeaf(popular_target, 0, parent)              # Create leaf
+            return leaf
         else:
 
             a = self.choose_attribute(attrs, examples)  # Choose the most important attribute based on info gained
