@@ -308,6 +308,8 @@ class DecisionTreeLearner:
         # in class to an n-case chi^2 test.  This part is straight forward.
         # Whereas in class we had positive and negative samples, now there
         # are more than two, but they are all handled similarly.
+        # Don't forget, scipy has an inverse cdf for chi^2
+        # scipy.stats.chi2.ppf
 
         delta = 0.0
         p_list = fork.distribution                      # Get p
@@ -339,21 +341,27 @@ class DecisionTreeLearner:
             for k in range(0, num_of_children):
                 p_k = p_k_list[k]
                 n_k = n_k_list[k]
-                fraction = items_in_split[index] / p_total          # (p_k + n_k) / ( p + n)
+                fraction = items_in_split[k] / p_total          # (p_k + n_k) / ( p + n)
                 p_hat = p * fraction                                # p * (p_k + n_k) / ( p + n)
                 n_hat = n * fraction                                # n * (p_k + n_k) / ( p + n)
-                p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat      # ((p_k - p_hat)^2)/p_hat
-                n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat      # ((n_k - n_hat)^2)/n_hat
+                p_k_dev = 0
+                if p_hat != 0:
+                    p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat   # ((p_k - p_hat)^2)/p_hat
+                n_k_dev = 0
+                if n_hat != 0:
+                    n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat   # ((n_k - n_hat)^2)/n_hat
                 sum_dev = p_k_dev + n_k_dev
                 delta += sum_dev
             delta_list.append(delta)
 
+        self.chi2_result.value = sum(delta_list)
 
-        chi2 = scipy.stats.chi2.cdf(delta, self.dof)
+        similar = False
+        if self.chi2_result.value < threshold_inverse_cdf:
+            similar = True
+        self.chi2_result.similar = similar
 
-        # Don't forget, scipy has an inverse cdf for chi^2
-        # scipy.stats.chi2.ppf
-        return chi2
+        return self.chi2_result
         # raise NotImplementedError
 
     def neg_dist(self, list_dist):
