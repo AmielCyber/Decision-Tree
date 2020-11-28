@@ -313,20 +313,20 @@ class DecisionTreeLearner:
 
         delta = 0.0
         p_list = fork.distribution                      # Get p
-        p_total = sum(p_list)                           # Get p + n
-        n_list = np.subtract(p_total, p_list)           # Get n
-        p_err_rate = np.divide(p_list, p_total)         # Get p/(p+n)
+        p_plus_n = sum(p_list)                           # Get p + n
+        n_list = np.subtract(p_plus_n, p_list)           # Get n
+        p_err_rate = np.divide(p_list, p_plus_n)         # Get p/(p+n)
         n_err_rate = np.subtract(1, p_err_rate)         # Get n/(p+n)
         size = len(p_list)
         child_nodes = fork.branches
         p_k_list = []
         n_k_list = []
-        items_in_split = []                             # For p_k + n_k
+        pk_plus_nk = []                             # For p_k + n_k
         # Get p_k and n_k
         for child in child_nodes.values():
             dist = child.distribution                   # Get p_k
             total = sum(dist)                           # Get items in split
-            items_in_split.append(total)
+            pk_plus_nk.append(total)
             p_k_list.append(dist)
             n_k_list.append(np.subtract(total, dist))   # Get n_k
 
@@ -334,14 +334,14 @@ class DecisionTreeLearner:
         # Get delta
         delta = 0.0
         delta_list = []
-        for index in range(0, size):
-            p = p_list[index]
-            n = n_list[index]
-            delta = 0.0
+        for index in range(0, size):                                # For each distribution value
+            p = p_list[index]                                       # a value in the distribution
+            n = n_list[index]                                       # a neg value in the distribution
+            # For each child node
             for k in range(0, num_of_children):
                 p_k = p_k_list[k]
                 n_k = n_k_list[k]
-                fraction = items_in_split[k] / p_total          # (p_k + n_k) / ( p + n)
+                fraction = pk_plus_nk[k] / p_plus_n                 # (p_k + n_k) / ( p + n)
                 p_hat = p * fraction                                # p * (p_k + n_k) / ( p + n)
                 n_hat = n * fraction                                # n * (p_k + n_k) / ( p + n)
                 p_k_dev = 0
@@ -352,9 +352,8 @@ class DecisionTreeLearner:
                     n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat   # ((n_k - n_hat)^2)/n_hat
                 sum_dev = p_k_dev + n_k_dev
                 delta += sum_dev
-            delta_list.append(delta)
 
-        self.chi2_result.value = sum(delta_list)
+        self.chi2_result.value = delta/2
 
         similar = False
         if self.chi2_result.value < threshold_inverse_cdf:
