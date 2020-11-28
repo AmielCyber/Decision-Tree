@@ -72,19 +72,19 @@ class DecisionTreeLearner:
         if len(examples) == 0:
             # If there are no more examples create leaf with the most popular target based on parent examples
             popular_target = self.plurality_value(parent_examples)
-            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)              # Create leaf
+            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)  # Create leaf
             return leaf
         elif self.all_same_class(examples):
             # If all examples are from the same class then we are done, hence we will return the result in a leaf
             target = self.dataset.target  # Get target index
             # Returns the class from the first example since all the remaining examples have the same class
             result = examples[0][target]
-            leaf = DecisionLeaf(result, self.count_targets(examples), parent)     # Create leaf
+            leaf = DecisionLeaf(result, self.count_targets(examples), parent)  # Create leaf
             return leaf
         elif len(attrs) == 0:
             # If there are no more questions to ask then pick the most popular target based on the examples passed
             popular_target = self.plurality_value(examples)
-            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)              # Create leaf
+            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)  # Create leaf
             return leaf
         else:
 
@@ -228,8 +228,7 @@ class DecisionTreeLearner:
         class_count = self.count_targets(examples)
         return class_count
 
-        # raise NotImplementedError
-
+    ########################################################################################################################
     def prune(self, p_value):
         """Prune leaves of a tree when the hypothesis that the distribution
         in the leaves is not the same as in the parents as measured by
@@ -245,7 +244,12 @@ class DecisionTreeLearner:
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
+        return 1.0
         # raise NotImplementedError
+
+    ########################################################################################################################
+    def prune_aux(self, p_value, tree, parent):
+        print('cool')
 
     def chi_annotate(self, p_value):
         """chi_annotate(p_value)
@@ -275,6 +279,7 @@ class DecisionTreeLearner:
             for child in branch.branches.values():
                 self.__chi_annotate_aux(child, p_value)
 
+    ########################################################################################################################
     def chi2test(self, p_value, fork):
         """chi2test - Helper function for prune
         Given a DecisionFork and a p_value, determine if the children
@@ -299,6 +304,28 @@ class DecisionTreeLearner:
         # look up threshold from chi-squared inverse cdf at 1 - p-value
         threshold_inverse_cdf = scipy.stats.chi2.ppf(1 - p_value, self.dof)
 
+
+        delta = 0.0
+        p_distribution = fork.distribution
+        n_distribution = self.neg_dist(p_distribution)
+        size = len(p_distribution)
+        child_nodes = fork.branches
+        for child in child_nodes.values():
+            p_child_distribution = child.distribution
+            n_child_distribution = self.neg_dist(p_child_distribution)
+            for index in range(0, size):
+                p = p_distribution[index]
+                n = n_distribution[index]
+                p_k = p_child_distribution[index]
+                n_k = n_child_distribution[index]
+                fraction = (p_k + n_k)/(p + n)
+                p_hat = p * fraction                # p^_k = p * ( (p^_k+n^_k)/ (p+n) )
+                n_hat = n * fraction                # n^_k = n * ( (p^_k+n^_k)/ (p+n) )
+                p_s = ((p_k + p_hat) ** 2) / p_hat
+                n_s = ((n_k + n_hat) ** 2) / n_hat
+                addition = p_s + n_s
+                delta += addition
+
         # Hint:  You need to extend the 2 case chi^2 test that we covered
         # in class to an n-case chi^2 test.  This part is straight forward.
         # Whereas in class we had positive and negative samples, now there
@@ -306,8 +333,12 @@ class DecisionTreeLearner:
 
         # Don't forget, scipy has an inverse cdf for chi^2
         # scipy.stats.chi2.ppf
-
+        return 1.0
         # raise NotImplementedError
+
+    def neg_dist(self, list_dist):
+        size = sum(list_dist)
+        return [size - x for x in list_dist]
 
     def __str__(self):
         """str - String representation of the tree"""
