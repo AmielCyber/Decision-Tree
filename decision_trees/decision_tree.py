@@ -12,6 +12,7 @@ from collections import namedtuple
 import numpy as np
 import scipy.stats
 
+from ml_lib.utils import scalar_vector_product
 from ml_lib.ml_util import argmax_random_tie, normalize, remove_all, best_index
 from ml_lib.decision_tree_support import DecisionLeaf, DecisionFork
 
@@ -84,7 +85,7 @@ class DecisionTreeLearner:
         elif len(attrs) == 0:
             # If there are no more questions to ask then pick the most popular target based on the examples passed
             popular_target = self.plurality_value(examples)
-            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)  # Create leaf
+            leaf = DecisionLeaf(popular_target, self.get_distribution(examples), parent)  # Create leaf
             return leaf
         else:
 
@@ -303,37 +304,49 @@ class DecisionTreeLearner:
 
         # look up threshold from chi-squared inverse cdf at 1 - p-value
         threshold_inverse_cdf = scipy.stats.chi2.ppf(1 - p_value, self.dof)
-
-
-        delta = 0.0
-        p_distribution = fork.distribution
-        n_distribution = self.neg_dist(p_distribution)
-        size = len(p_distribution)
-        child_nodes = fork.branches
-        for child in child_nodes.values():
-            p_child_distribution = child.distribution
-            n_child_distribution = self.neg_dist(p_child_distribution)
-            for index in range(0, size):
-                p = p_distribution[index]
-                n = n_distribution[index]
-                p_k = p_child_distribution[index]
-                n_k = n_child_distribution[index]
-                fraction = (p_k + n_k)/(p + n)
-                p_hat = p * fraction                # p^_k = p * ( (p^_k+n^_k)/ (p+n) )
-                n_hat = n * fraction                # n^_k = n * ( (p^_k+n^_k)/ (p+n) )
-                p_s = ((p_k + p_hat) ** 2) / p_hat
-                n_s = ((n_k + n_hat) ** 2) / n_hat
-                addition = p_s + n_s
-                delta += addition
-
         # Hint:  You need to extend the 2 case chi^2 test that we covered
         # in class to an n-case chi^2 test.  This part is straight forward.
         # Whereas in class we had positive and negative samples, now there
         # are more than two, but they are all handled similarly.
 
+        NEGATIVE_VALUE = 0
+        POSITIVE_VALUE = 1
+        delta = 0.0
+        p = fork.distribution
+        n = self.neg_dist(p)
+        size = len(p)
+        child_nodes = fork.branches
+        for child in child_nodes.values():
+            p_k = child.distribution
+            n_k = self.neg_dist(p_k)
+            # Get fraction (p_k + n_k) / ( p + n) which we will use for expected values
+            pk_plus_nk = p_k[0] + n_k[0]  # Get p_k + n_k
+            p_plus_n = p[0] + n[0]  # Get p + n
+            # Get fraction (p_k + n_k) / ( p + n)
+            fraction = 0 if p_plus_n == 0 else pk_plus_nk / p_plus_n
+            # Get expected values of p and n
+            p_hat = scalar_vector_product(fraction, p)
+            n_hat = scalar_vector_product(fraction, n)
+            # Get positive deviation
+            p_dev = scalar_vector_product(-1, p_hat)  # -p_hat
+            p_dev = np.sum([p_k, p_dev], axis=0)  # p_k - p_hat
+            p_dev = np.square(p_dev)  # (p_k - p_hat)^2
+            p_dev = np.divide(p_dev, p_hat)  # ((p_k - p_hat)^2)/p_hat
+            # Get negative deviation
+            n_dev = scalar_vector_product(-1, n_hat)  # -n_hat
+            n_dev = np.sum([n_k, n_dev], axis=0)  # n_k - n_hat
+            n_dev = np.square(n_dev)  # (n_k - n_hat)^2
+            n_dev = np.divide(n_dev, n_hat)  # ((n_k - n_hat)^2)/ n_hat
+            # Add deviations
+            sum_dev = np.sum([p_dev, n_dev], axis=0)  # ((p_k - p_hat)^2)/p_hat + ((n_k - n_hat)^2)/ n_hat
+            # Get delta
+            delta = np.sum(sum_dev)
+
+        chi2 = scipy.stats.chi2.cdf(delta, self.dof)
+
         # Don't forget, scipy has an inverse cdf for chi^2
         # scipy.stats.chi2.ppf
-        return 1.0
+        return chi2
         # raise NotImplementedError
 
     def neg_dist(self, list_dist):
