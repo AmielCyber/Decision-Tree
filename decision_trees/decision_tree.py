@@ -309,38 +309,45 @@ class DecisionTreeLearner:
         # Whereas in class we had positive and negative samples, now there
         # are more than two, but they are all handled similarly.
 
-        NEGATIVE_VALUE = 0
-        POSITIVE_VALUE = 1
         delta = 0.0
-        p = fork.distribution
-        n = self.neg_dist(p)
-        size = len(p)
+        p_list = fork.distribution                      # Get p
+        p_total = sum(p_list)                           # Get p + n
+        n_list = np.subtract(p_total, p_list)           # Get n
+        p_err_rate = np.divide(p_list, p_total)         # Get p/(p+n)
+        n_err_rate = np.subtract(1, p_err_rate)         # Get n/(p+n)
+        size = len(p_list)
         child_nodes = fork.branches
+        p_k_list = []
+        n_k_list = []
+        items_in_split = []                             # For p_k + n_k
+        # Get p_k and n_k
         for child in child_nodes.values():
-            p_k = child.distribution
-            n_k = self.neg_dist(p_k)
-            # Get fraction (p_k + n_k) / ( p + n) which we will use for expected values
-            pk_plus_nk = p_k[0] + n_k[0]  # Get p_k + n_k
-            p_plus_n = p[0] + n[0]  # Get p + n
-            # Get fraction (p_k + n_k) / ( p + n)
-            fraction = 0 if p_plus_n == 0 else pk_plus_nk / p_plus_n
-            # Get expected values of p and n
-            p_hat = scalar_vector_product(fraction, p)
-            n_hat = scalar_vector_product(fraction, n)
-            # Get positive deviation
-            p_dev = scalar_vector_product(-1, p_hat)  # -p_hat
-            p_dev = np.sum([p_k, p_dev], axis=0)  # p_k - p_hat
-            p_dev = np.square(p_dev)  # (p_k - p_hat)^2
-            p_dev = np.divide(p_dev, p_hat)  # ((p_k - p_hat)^2)/p_hat
-            # Get negative deviation
-            n_dev = scalar_vector_product(-1, n_hat)  # -n_hat
-            n_dev = np.sum([n_k, n_dev], axis=0)  # n_k - n_hat
-            n_dev = np.square(n_dev)  # (n_k - n_hat)^2
-            n_dev = np.divide(n_dev, n_hat)  # ((n_k - n_hat)^2)/ n_hat
-            # Add deviations
-            sum_dev = np.sum([p_dev, n_dev], axis=0)  # ((p_k - p_hat)^2)/p_hat + ((n_k - n_hat)^2)/ n_hat
-            # Get delta
-            delta = np.sum(sum_dev)
+            dist = child.distribution                   # Get p_k
+            total = sum(dist)                           # Get items in split
+            items_in_split.append(total)
+            p_k_list.append(dist)
+            n_k_list.append(np.subtract(total, dist))   # Get n_k
+
+        num_of_children = len(p_k_list)
+        # Get delta
+        delta = 0.0
+        delta_list = []
+        for index in range(0, size):
+            p = p_list[index]
+            n = n_list[index]
+            delta = 0.0
+            for k in range(0, num_of_children):
+                p_k = p_k_list[k]
+                n_k = n_k_list[k]
+                fraction = items_in_split[index] / p_total          # (p_k + n_k) / ( p + n)
+                p_hat = p * fraction                                # p * (p_k + n_k) / ( p + n)
+                n_hat = n * fraction                                # n * (p_k + n_k) / ( p + n)
+                p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat      # ((p_k - p_hat)^2)/p_hat
+                n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat      # ((n_k - n_hat)^2)/n_hat
+                sum_dev = p_k_dev + n_k_dev
+                delta += sum_dev
+            delta_list.append(delta)
+
 
         chi2 = scipy.stats.chi2.cdf(delta, self.dof)
 
