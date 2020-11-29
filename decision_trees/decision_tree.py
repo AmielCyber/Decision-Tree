@@ -315,8 +315,6 @@ class DecisionTreeLearner:
         p_list = fork.distribution                      # Get p
         p_plus_n = sum(p_list)                           # Get p + n
         n_list = np.subtract(p_plus_n, p_list)           # Get n
-        p_err_rate = np.divide(p_list, p_plus_n)         # Get p/(p+n)
-        n_err_rate = np.subtract(1, p_err_rate)         # Get n/(p+n)
         size = len(p_list)
         child_nodes = fork.branches
         p_k_list = []
@@ -333,23 +331,17 @@ class DecisionTreeLearner:
         num_of_children = len(p_k_list)
         # Get delta
         delta = 0.0
-        delta_list = []
         for index in range(0, size):                                # For each distribution value
             p = p_list[index]                                       # a value in the distribution
             n = n_list[index]                                       # a neg value in the distribution
             # For each child node
             for k in range(0, num_of_children):
                 p_k = p_k_list[k]
-                n_k = n_k_list[k]
                 fraction = pk_plus_nk[k] / p_plus_n                 # (p_k + n_k) / ( p + n)
                 p_hat = p * fraction                                # p * (p_k + n_k) / ( p + n)
-                n_hat = n * fraction                                # n * (p_k + n_k) / ( p + n)
                 p_k_dev = 0
                 if p_hat != 0:
                     p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat   # ((p_k - p_hat)^2)/p_hat
-                #n_k_dev = 0
-                #if n_hat != 0:
-                   # n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat   # ((n_k - n_hat)^2)/n_hat"""
                 sum_dev = p_k_dev
                 delta += sum_dev
 
