@@ -45,10 +45,13 @@ def main():
     mushroomData = DataSet(attr_names=True, target=0, name='mushrooms')
     zooData = DataSet(attr_names=True, name='zoo', exclude=[0])
 
-    # Call cross validation with the DecisionTreeLearner class
+    # Call cross validation with the DecisionTreeLearner class for 10 folds and 2 trials
     mushroomResults = cross_validation(DecisionTreeLearner, mushroomData)
     zooResults = cross_validation(DecisionTreeLearner, zooData)
 
+    print("-------------------------------------------------------------------------------------------------------------")
+    print("MUSHROOM")
+    print("-------------------------------------------------------------------------------------------------------------")
     mushroom_err = mushroomResults[0]
     mushroom_model = mushroomResults[1]
     print('err:', mushroom_err)
@@ -56,6 +59,7 @@ def main():
     for tree in mushroom_model:
         print(tree)
 
+    #Mean error and Standard Deviation of Mushroom Data Without Pruning
     mushroom_mean_error = np.mean(mushroom_err, 0)
     mushroom_std_error = np.std(mushroom_err, 0)
     print("Mushroom Mean Error Without Pruning: ", mushroom_mean_error)
@@ -69,10 +73,16 @@ def main():
         print(tree)
     for mushroom in mushroom_model:
         mushroom.prune(0.05)
+
+    # Mean error and Standard Deviation of Mushroom Data With Pruning
     mushroom_mean_error_prune = np.mean(mushroom_err, 0)
     mushroom_std_error_prune = np.std(mushroom_err, 0)
     print("Mushroom Mean Error With Pruning: ", mushroom_mean_error_prune)
     print("Mushroom STD Error With Pruning: ", mushroom_std_error_prune)
+
+    print("-------------------------------------------------------------------------------------------------------------")
+    print("ZOO")
+    print("-------------------------------------------------------------------------------------------------------------")
 
     zoo_err = zooResults[0]
     zoo_model = zooResults[1]
@@ -81,6 +91,7 @@ def main():
     for tree in zoo_model:
         print(tree)
 
+    # Mean error and Standard Deviation of Zoo Data Without Pruning
     zoo_mean_error = np.mean(zoo_err, 0)
     zoo_std_error = np.std(zoo_err, 0)
     print("Zoo Mean Error Without Pruning: ", zoo_mean_error)
@@ -92,26 +103,14 @@ def main():
     zoo_model[0].prune(0.05)
     for tree in zoo_model:
         print(tree)
-    for zoo in zoo_model[0]:
+    for zoo in zoo_model:
         zoo.prune(0.05)
 
+    # Mean error and Standard Deviation of Zoo Data With Pruning
     zoo_mean_error_prune = np.mean(zoo_err, 0)
     zoo_std_error_prune = np.std(zoo_err, 0)
     print("Zoo Mean Error With Pruning: ", zoo_mean_error_prune)
     print("Zoo STD Error With Pruning: ", zoo_std_error_prune)
-
-
-
-
-    ##################################################################
-    zooExamples = zooData.examples
-    zooInputs = zooData.inputs
-    #DecisionTreeLearner(zooData)
-
-    print(mushroomData)
-    print(zooData)
-    print(zooExamples)
-    print(zooInputs)
 
 if __name__ == '__main__':
     main()
