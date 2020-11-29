@@ -85,7 +85,7 @@ class DecisionTreeLearner:
         elif len(attrs) == 0:
             # If there are no more questions to ask then pick the most popular target based on the examples passed
             popular_target = self.plurality_value(examples)
-            leaf = DecisionLeaf(popular_target, self.get_distribution(examples), parent)  # Create leaf
+            leaf = DecisionLeaf(popular_target, self.count_targets(examples), parent)  # Create leaf
             return leaf
         else:
 
@@ -241,7 +241,7 @@ class DecisionTreeLearner:
         and DecisionFork only contains DecisionLeaf children, after
         pruning, it is examined for pruning as well.
         """
-
+        #self.prune_aux(p_value, self.tree, None)
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
@@ -249,8 +249,37 @@ class DecisionTreeLearner:
         # raise NotImplementedError
 
     ########################################################################################################################
-    def prune_aux(self, p_value, tree, parent):
-        print('cool')
+    def prune_aux(self, p_value, branch, parent):
+        branches = []
+        if isinstance(branch, DecisionLeaf):
+            return
+        for child in branch.branches.values():
+            if isinstance(child, DecisionFork):
+                branches.append(child)
+        if len(branches) == 0:
+            chi_test_tuple = self.chi2test(p_value, branch)
+            similarity = chi_test_tuple.similar
+            print(similarity)
+            if similarity == True:
+                #prune
+                branch_best_index = best_index(branch.distribution)
+                keys = branch.branches.keys()
+                print(keys)
+                values = branch.branches.values()
+                print(values)
+                items = branch.branches.items()
+                print(items)
+                #for key, name in branch.branches.items():
+                result = self.dataset.values[self.dataset.target][branch_best_index]
+                new_leaf = DecisionLeaf(result, branch.distribution[branch_best_index], branch)
+                #print("I am pruned: ", new_leaf)
+                #parent.branches.update({branch.attr, new_leaf})
+
+                self.prune_aux(p_value, branch, parent)
+        else:
+            for b in branches:
+                self.prune_aux(p_value, b, branch)
+
 
     def chi_annotate(self, p_value):
         """chi_annotate(p_value)
