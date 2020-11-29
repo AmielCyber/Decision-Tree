@@ -242,7 +242,7 @@ class DecisionTreeLearner:
         and DecisionFork only contains DecisionLeaf children, after
         pruning, it is examined for pruning as well.
         """
-        #self.prune_aux(p_value, self.tree, None)
+        self.prune_aux(p_value, self.tree, None)
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
@@ -264,19 +264,23 @@ class DecisionTreeLearner:
             if similarity == True:
                 #prune
                 branch_best_index = best_index(branch.distribution)
-                keys = branch.branches.keys()
-                print(keys)
-                values = branch.branches.values()
-                print(values)
-                items = branch.branches.items()
-                print(items)
-                #for key, name in branch.branches.items():
+                update_key = 0
                 result = self.dataset.values[self.dataset.target][branch_best_index]
                 new_leaf = DecisionLeaf(result, branch.distribution[branch_best_index], branch)
+                for tupleValue in branch.branches.items():
+                    key, name = tupleValue
+                    if name.result == new_leaf.result:
+                        update_key = key
                 #print("I am pruned: ", new_leaf)
-                #parent.branches.update({branch.attr, new_leaf})
+                print("Previous Tree: ", parent)
+                print("\n")
+                print("{0} has been pruned", branch)
+                print("\n")
+                parent.branches.update({update_key: new_leaf})
+                print("New tree: ", parent)
+                print("\n")
+                print("\n")
 
-                self.prune_aux(p_value, branch, parent)
         else:
             for b in branches:
                 self.prune_aux(p_value, b, branch)
