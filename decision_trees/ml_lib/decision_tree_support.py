@@ -102,7 +102,7 @@ class DecisionFork:
         dist_str = ",".join([str(d) for d in self.distribution])
         # Show the branch values that were presented (not really needed, but
         # makes it easier to see
-        branch_vals = ", ".join(self.branches.keys())
+        branch_vals = ", ".join(str(self.branches.keys()))
 
         # String consists of split message
         result = [f"{self.attr_name}{chi2} split ({dist_str}) on values {branch_vals}"]
