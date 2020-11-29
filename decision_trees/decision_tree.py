@@ -260,26 +260,27 @@ class DecisionTreeLearner:
         if len(branches) == 0:
             chi_test_tuple = self.chi2test(p_value, branch)
             similarity = chi_test_tuple.similar
-            print(similarity)
+            #print(similarity)
             if similarity == True:
                 #prune
                 branch_best_index = best_index(branch.distribution)
                 update_key = 0
                 result = self.dataset.values[self.dataset.target][branch_best_index]
-                new_leaf = DecisionLeaf(result, branch.distribution[branch_best_index], branch)
+                new_leaf = DecisionLeaf(result, branch.distribution, branch)
                 for tupleValue in branch.branches.items():
                     key, name = tupleValue
                     if name.result == new_leaf.result:
                         update_key = key
                 #print("I am pruned: ", new_leaf)
-                print("Previous Tree: ", parent)
-                print("\n")
-                print("{0} has been pruned", branch)
-                print("\n")
+                #print("Previous Tree: ", parent)
+                #print("\n")
+                #print("{0} has been pruned", branch)
+                #print("\n")
                 parent.branches.update({update_key: new_leaf})
-                print("New tree: ", parent)
-                print("\n")
-                print("\n")
+                #print("Pruning Happened")
+                #print("New tree: ", parent)
+                #print("\n")
+                #print("\n")
 
         else:
             for b in branches:
