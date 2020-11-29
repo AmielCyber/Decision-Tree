@@ -92,7 +92,7 @@ def main():
     zoo_model[0].prune(0.05)
     for tree in zoo_model:
         print(tree)
-    for zoo in zoo_model[0]:
+    for zoo in zoo_model:
         zoo.prune(0.05)
 
     zoo_mean_error_prune = np.mean(zoo_err, 0)

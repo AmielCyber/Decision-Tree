@@ -97,6 +97,7 @@ class DecisionTreeLearner:
             valuesWithAList = self.split_by(a, examples)  # e.g. [(val_1,listOfExamplesWithVal_1),...]
             for tupleValue in valuesWithAList:  # For each value and its examples associated with attribute a
                 v, vexamples = tupleValue  # value, value_examples
+                v = str(v)
                 subtree = self.decision_tree_learning(vexamples, np.setdiff1d(attrs, [a]), t, examples)
                 t.add(v, subtree)  # Add a subtree to our tree with v as branch level
             return t  # Return the current tree
