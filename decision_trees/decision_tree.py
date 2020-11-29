@@ -347,10 +347,10 @@ class DecisionTreeLearner:
                 p_k_dev = 0
                 if p_hat != 0:
                     p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat   # ((p_k - p_hat)^2)/p_hat
-                n_k_dev = 0
-                if n_hat != 0:
-                    n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat   # ((n_k - n_hat)^2)/n_hat
-                sum_dev = p_k_dev + n_k_dev
+                #n_k_dev = 0
+                #if n_hat != 0:
+                   # n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat   # ((n_k - n_hat)^2)/n_hat"""
+                sum_dev = p_k_dev
                 delta += sum_dev
 
         self.chi2_result.value = delta
