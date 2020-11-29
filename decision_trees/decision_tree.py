@@ -152,26 +152,25 @@ class DecisionTreeLearner:
         # Returns the attribute index
         # raise NotImplementedError
 
+    def entropy(self, examples):
+        return self.information_content([self.count(self.dataset.target, v, examples) for v in self.dataset.values[self.dataset.target]])
+
     def information_gain(self, attr, examples):
         """Return the expected reduction in entropy for examples from splitting by attr."""
         # information gain is Gain = entropy - remainder
         # only use information_per_class used in information_gain
         # use split_by in remainder
         # use information_per_class, split_by, information_content
-        entropy = 0.0
         remainder = 0.0
-
-        list_of_class = self.information_per_class(examples)
-        entropy = self.information_content(list_of_class)
-        valuesWithAList = self.split_by(attr, examples)
-        for tupleValue in valuesWithAList:  # going through list of attributes and getting examples based on attr
+        total = float(len(examples))
+        valueswithAList = self.split_by(attr, examples)
+        for tupleValue in valueswithAList:
             v, vexamples = tupleValue
-            list_of_remainder = self.information_per_class(vexamples)  # getting new list of counts for remainder
-            entropyRemainder = self.information_content(list_of_remainder)  # getting entropy of remainder
-            remainder = remainder + entropyRemainder  # summing all remainders together
-        gain = entropy - remainder
+            v_entropy = self.entropy(vexamples)
+            remainderSum = (len(vexamples) / total) * v_entropy
+            remainder = remainder + remainderSum
+        gain = self.entropy(examples) - remainder
         return gain
-
         # raise NotImplementedError
 
     def split_by(self, attr, examples):
@@ -198,13 +197,14 @@ class DecisionTreeLearner:
         """
         # information_content says to compute entropy [H(x)]
         # normalize class_counts to get ratios/fractions for propability then use entropy equation to find summation
-        entropy = 0.0
-        probability = normalize(np.setdiff1d(class_counts, [0]))
 
-        for ratio in probability:  # looping through the probabilities from normalizing
-            sum = -1 * ratio * np.log2(ratio)
-            entropy = entropy + sum
+        entropy = 0.0
+        class_probability = normalize(remove_all(0, class_counts)) #np.setdiff1d(class_counts, [0]))
+        for ratio in class_probability:  # looping through the probabilities from normalizing
+            entropySum = -1 * ratio * np.log2(ratio)
+            entropy = entropy + entropySum
         return entropy
+
         # returning entropy [H(x)] as a float but maybe it should be a list because remainder needs to get every individual entropies
 
         # Hints:
@@ -353,7 +353,7 @@ class DecisionTreeLearner:
                 sum_dev = p_k_dev + n_k_dev
                 delta += sum_dev
 
-        self.chi2_result.value = delta/2
+        self.chi2_result.value = delta
 
         similar = False
         if self.chi2_result.value < threshold_inverse_cdf:
