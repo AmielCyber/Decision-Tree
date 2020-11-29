@@ -309,7 +309,6 @@ class DecisionTreeLearner:
             for child in branch.branches.values():
                 self.__chi_annotate_aux(child, p_value)
 
-    ########################################################################################################################
     def chi2test(self, p_value, fork):
         """chi2test - Helper function for prune
         Given a DecisionFork and a p_value, determine if the children
@@ -344,8 +343,6 @@ class DecisionTreeLearner:
         p_list = fork.distribution                      # Get p
         p_plus_n = sum(p_list)                           # Get p + n
         n_list = np.subtract(p_plus_n, p_list)           # Get n
-        p_err_rate = np.divide(p_list, p_plus_n)         # Get p/(p+n)
-        n_err_rate = np.subtract(1, p_err_rate)         # Get n/(p+n)
         size = len(p_list)
         child_nodes = fork.branches
         p_k_list = []
@@ -355,42 +352,34 @@ class DecisionTreeLearner:
         for child in child_nodes.values():
             dist = child.distribution                   # Get p_k
             total = sum(dist)                           # Get items in split
-            pk_plus_nk.append(total)
+            pk_plus_nk.append(total)                    # Get p_k + n_k
             p_k_list.append(dist)
             n_k_list.append(np.subtract(total, dist))   # Get n_k
 
         num_of_children = len(p_k_list)
         # Get delta
         delta = 0.0
-        delta_list = []
         for index in range(0, size):                                # For each distribution value
             p = p_list[index]                                       # a value in the distribution
-            n = n_list[index]                                       # a neg value in the distribution
             # For each child node
             for k in range(0, num_of_children):
-                p_k = p_k_list[k]
-                n_k = n_k_list[k]
+                p_k = p_k_list[k]                                   # Get p_k value
                 fraction = pk_plus_nk[k] / p_plus_n                 # (p_k + n_k) / ( p + n)
                 p_hat = p * fraction                                # p * (p_k + n_k) / ( p + n)
-                n_hat = n * fraction                                # n * (p_k + n_k) / ( p + n)
-                p_k_dev = 0
+                p_k_dev = 0                                         # Get p_k deviation
                 if p_hat != 0:
                     p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat   # ((p_k - p_hat)^2)/p_hat
-                #n_k_dev = 0
-                #if n_hat != 0:
-                   # n_k_dev = ((n_k[index] - n_hat) ** 2) / n_hat   # ((n_k - n_hat)^2)/n_hat"""
-                sum_dev = p_k_dev
-                delta += sum_dev
+                delta += p_k_dev                                    # Increment delta
 
+        # Set our delta value in the chi2 result
         self.chi2_result.value = delta
-
+        # Determine if leaves are irrelevant
         similar = False
         if self.chi2_result.value < threshold_inverse_cdf:
             similar = True
         self.chi2_result.similar = similar
 
         return self.chi2_result
-        # raise NotImplementedError
 
     def neg_dist(self, list_dist):
         size = sum(list_dist)
