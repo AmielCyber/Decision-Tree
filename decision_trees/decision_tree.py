@@ -15,6 +15,7 @@ import scipy.stats
 from ml_lib.utils import scalar_vector_product
 from ml_lib.ml_util import argmax_random_tie, normalize, remove_all, best_index
 from ml_lib.decision_tree_support import DecisionLeaf, DecisionFork
+import ml_lib.utils
 
 
 class DecisionTreeLearner:
