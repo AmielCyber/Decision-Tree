@@ -55,6 +55,8 @@ class DecisionTreeLearner:
 
         self.debug = debug
 
+        self.p_value = p_value
+
     def __str__(self):
         "str - Create a string representation of the tree"
         if self.tree is None:
@@ -107,6 +109,7 @@ class DecisionTreeLearner:
                 subtree = self.decision_tree_learning(vexamples, np.setdiff1d(attrs, [a]), t, examples)
                 t.add(v, subtree)  # Add a subtree to our tree with v as branch level
             return t  # Return the current tree
+
 
     def plurality_value(self, examples):
         """
@@ -248,7 +251,8 @@ class DecisionTreeLearner:
         and DecisionFork only contains DecisionLeaf children, after
         pruning, it is examined for pruning as well.
         """
-        self.prune_aux(p_value, self.tree, None)
+        if self.p_value:
+            self.prune_aux(p_value, self.tree, None)
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
