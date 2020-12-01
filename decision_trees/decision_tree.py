@@ -246,42 +246,43 @@ class DecisionTreeLearner:
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
-        return 1.0
         # raise NotImplementedError
 
-    ########################################################################################################################
     def prune_aux(self, p_value, branch, parent):
         branches = []
         if isinstance(branch, DecisionLeaf):
             return
-        for child in branch.branches.values():
+        for child in branch.branches.values(): #checks if all children nodes are leafs
             if isinstance(child, DecisionFork):
                 branches.append(child)
         if len(branches) == 0:
             chi_test_tuple = self.chi2test(p_value, branch)
             similarity = chi_test_tuple.similar
-            #print(similarity)
-            if similarity == True:
+            if similarity == True: #checks if chi test returns true for pruning to happen
                 #prune
                 branch_best_index = best_index(branch.distribution)
                 update_key = 0
                 result = self.dataset.values[self.dataset.target][branch_best_index]
-                new_leaf = DecisionLeaf(result, branch.distribution, branch)
-                for tupleValue in branch.branches.items():
+                new_leaf = DecisionLeaf(result, branch.distribution, branch) #replace decision fork with decision leaf
+                for tupleValue in branch.branches.items(): #finding the key to replace the leaf
                     key, name = tupleValue
-                    if name.result == new_leaf.result:
-                        update_key = key
-                #print("I am pruned: ", new_leaf)
-                #print("Previous Tree: ", parent)
-                #print("\n")
-                #print("{0} has been pruned", branch)
-                #print("\n")
+                    if len(branch.parent.branches) == 2:
+                        if name.result == new_leaf.result:
+                            update_key = key
+                    else:
+                        if name.parent.attr == new_leaf.parent.attr:
+                            update_key = name.parent.attr
+                print("Previous Tree: ", parent)
+                print("\n")
+                print(" Pruned: ", branch)
+                print("\n")
                 parent.branches.update({update_key: new_leaf})
-                #print("Pruning Happened")
-                #print("New tree: ", parent)
-                #print("\n")
-                #print("\n")
+                print("New tree: ", parent)
+                print("\n")
+                print("\n")
 
+                #for b in parent.branches.values():
+                 #   self.prune_aux(p_value, b, parent)
         else:
             for b in branches:
                 self.prune_aux(p_value, b, branch)
