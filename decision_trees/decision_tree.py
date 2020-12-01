@@ -1,10 +1,16 @@
 """#####################################################################################################################
-Contains skeleton code for a DecisionTree class. The constructor expects a dataset to be learned.
-Some of the methods are written for you. Do not change the names of any of the predefined variables or interfaces,
-they will be examined in the unit test code and can cause your execution to fail.
-The class contains methods to predict the class of examples, estimation entropy, estimate χ 2 statistics,
-etc. Read through the code to determine what is provided and what you need to write.
-The bulk of your assignment is modifying this module.
+Pair Programming Equitable Participation & Honesty Affidavit
+We the undersigned promise that we have in good faith attempted to follow the principles of pair programming.
+Although we were free to discuss ideas with others, the implementation is our own.
+We have shared a common workspace and taken turns at the keyboard for the majority of the work that we are submitting.
+Furthermore, any non programming portions of the assignment were done independently.
+We recognize that should this not be the case, we will be subject to penalties as outlined in the course syllabus.
+
+Pair Programmer 1 (print & sign your name, then date it)
+Lilian Vu 11/1/2020
+
+Pair Programmer 2 (print & sign your name, then date it)
+Amiel Nava 11/1/2020
 #####################################################################################################################"""
 import math
 from collections import namedtuple

@@ -1,17 +1,16 @@
 """#####################################################################################################################
-Entry point into your program. You will be classifying the mushroom data set and the zoo data set, both of which are
-provided to you. Use the provided cross validation class to conduct two 10-fold crossvalidation decision tree
-experiments.
+Pair Programming Equitable Participation & Honesty Affidavit
+We the undersigned promise that we have in good faith attempted to follow the principles of pair programming.
+Although we were free to discuss ideas with others, the implementation is our own.
+We have shared a common workspace and taken turns at the keyboard for the majority of the work that we are submitting.
+Furthermore, any non programming portions of the assignment were done independently.
+We recognize that should this not be the case, we will be subject to penalties as outlined in the course syllabus.
 
-One should be conducted without pruning and the other with pruned trees at a p-value of 0.05.
-Two miniscule datasets that correspond to things we did in class are available as well: restaurant, and tiny_animal_set.
-You do not need to test these in your program, but you may find them very useful for debugging as you know the correct
-behavior of many of the operations you need to implement as we discussed these in class.
+Pair Programmer 1 (print & sign your name, then date it)
+Lilian Vu 11/1/2020
 
-The driver should print the mean error and standard deviation of the zoo and mushroom datasets using both unpruned
-and pruned decision trees. In addition, you should print out one unpruned decision tree and one pruned decision tree
-for each class. Call method chi_annotate on the tree before you print it so that you can see the χχ 2 statistic
-for each decision node.
+Pair Programmer 2 (print & sign your name, then date it)
+Amiel Nava 11/1/2020
 #####################################################################################################################"""
 
 """

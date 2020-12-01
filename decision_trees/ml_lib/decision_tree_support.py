@@ -1,16 +1,3 @@
-"""#####################################################################################################################
-Classes to handle branches in decision trees (the root of your decision tree should be an instance of DecisionFork)
-as well as leaf nodes of decision trees. These classes require several things at instantiation.
-
-For DecisionFork’s you will need the index of the attribute on which the fork depends (what question was asked),
-a tuple or list with the counts of each class that were active when this node of the tree was generated,
-the attribute name (as opposed to a number) to aid your understanding when the tree is displayed, and the parent node.
-
-DecisionLeaf simply needs the class associated with the node (e.g. bird or mammal for our example in class),
-the class counts, and the parent. Read through the code to determine how to add branches.
-Note that when printing the tree, if you have called chi_annotate on the tree, which will set a chi2 attribute on
-each DecisionTree, the tree will be printed with χχ 2 statistics for each branch.
-#####################################################################################################################"""
 from ml_lib.ml_util import argmax_random_tie, best_index
 
 class DecisionFork:
@@ -73,7 +60,7 @@ class DecisionFork:
             # Predict at this node.
             if self.default_child is None:
                 # Nothing specified, use pluarality value
-                selected_class = best_index(self.distribution)
+                selectged_class =  best_index(self.distribution)
                 prediction = selected_class
             else:
                 # User specified their own method for deciding the class
@@ -102,7 +89,7 @@ class DecisionFork:
         dist_str = ",".join([str(d) for d in self.distribution])
         # Show the branch values that were presented (not really needed, but
         # makes it easier to see
-        branch_vals = ", ".join(str(self.branches.keys()))
+        branch_vals = ", ".join([str(k) for k in self.branches.keys()])
 
         # String consists of split message
         result = [f"{self.attr_name}{chi2} split ({dist_str}) on values {branch_vals}"]
