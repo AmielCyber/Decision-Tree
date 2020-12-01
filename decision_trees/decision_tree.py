@@ -56,6 +56,8 @@ class DecisionTreeLearner:
         self.debug = debug
 
         self.p_value = p_value
+        self.prune(self.p_value)
+
 
     def __str__(self):
         "str - Create a string representation of the tree"
@@ -253,6 +255,7 @@ class DecisionTreeLearner:
         """
         if self.p_value:
             self.prune_aux(p_value, self.tree, None)
+            self.p_value = None
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
@@ -282,21 +285,10 @@ class DecisionTreeLearner:
                     else:
                         if name.parent.attr == new_leaf.parent.attr:
                             update_key = name.parent.attr
-                print("Previous Tree: ", parent)
-                print("\n")
-                print(" Pruned: ", branch)
-                print("\n")
                 parent.branches.update({update_key: new_leaf})
-                print("New tree: ", parent)
-                print("\n")
-                print("\n")
-
-                #for b in parent.branches.values():
-                 #   self.prune_aux(p_value, b, parent)
         else:
             for b in branches:
                 self.prune_aux(p_value, b, branch)
-
 
     def chi_annotate(self, p_value):
         """chi_annotate(p_value)
