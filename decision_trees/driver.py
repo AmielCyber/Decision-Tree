@@ -39,11 +39,11 @@ def main():
     # Constant Divider string when we print results
     DIVIDER = '-------------------------------------------------------------------------------------------------------------'
 
-    # Create data sets
+    """Create data sets"""
     mushroomData = DataSet(attr_names=True, target=0, name='mushrooms')
     zooData = DataSet(attr_names=True, name='zoo', exclude=[0])
 
-    # Call cross validation with the DecisionTreeLearner class for 10 folds and 2 trials
+    """Call cross validation with the DecisionTreeLearner class for 10 folds and 2 trials"""
     # Unpruned results
     mushroomResults = cross_validation(DecisionTreeLearner, mushroomData)
     zooResults = cross_validation(DecisionTreeLearner, zooData)
@@ -67,7 +67,21 @@ def main():
     zoo_err_p = zooResults_p[0]  # Get error lists from the pruned zoo training sets
     zoo_model_p = zooResults_p[1]  # Get the list of decision trees from the pruned zoo training sets
 
-    """Print Mushroom statistics"""
+    """Get statistics"""
+    # Mean error and Standard Deviation of Mushroom Data Without Pruning
+    mushroom_mean_error = np.mean(mushroom_err, 0)
+    mushroom_std_error = np.std(mushroom_err, 0)
+    # Mean error and Standard Deviation of Mushroom Data With Pruning
+    mushroom_mean_error_prune = np.mean(mushroom_err_p, 0)
+    mushroom_std_error_prune = np.std(mushroom_err_p, 0)
+    # Mean error and Standard Deviation of Zoo Data Without Pruning
+    zoo_mean_error = np.mean(zoo_err, 0)
+    zoo_std_error = np.std(zoo_err, 0)
+    # Mean error and Standard Deviation of Zoo Data With Pruning
+    zoo_mean_error_prune = np.mean(zoo_err_p, 0)
+    zoo_std_error_prune = np.std(zoo_err_p, 0)
+
+    """Print Mushroom results"""
     print(DIVIDER)
     print("MUSHROOM")
     print(DIVIDER)
@@ -75,44 +89,27 @@ def main():
     print('Mushroom Model:', mushroom_model)
     print('Mushroom with pruning err:', mushroom_err_p)
     print('Mushroom with pruning Model:', mushroom_model_p)
-
-    # Mean error and Standard Deviation of Mushroom Data Without Pruning
-    mushroom_mean_error = np.mean(mushroom_err, 0)
-    mushroom_std_error = np.std(mushroom_err, 0)
     print("Mushroom Mean Error Without Pruning: ", mushroom_mean_error)
     print("Mushroom STD Error Without Pruning: ", mushroom_std_error)
-
     print(DIVIDER)
     print("I am pruned")
     print(DIVIDER)
-    # Mean error and Standard Deviation of Mushroom Data With Pruning
-    mushroom_mean_error_prune = np.mean(mushroom_err_p, 0)
-    mushroom_std_error_prune = np.std(mushroom_err_p, 0)
     print("Mushroom Mean Error With Pruning: ", mushroom_mean_error_prune)
     print("Mushroom STD Error With Pruning: ", mushroom_std_error_prune)
 
+    """Print Zoo results"""
     print(DIVIDER)
     print("ZOO")
     print(DIVIDER)
-
     print('Zoo err:', zoo_err)
     print('Zoo Model:', zoo_model)
     print('Zoo with pruning err:', zoo_err_p)
     print('Zoo with pruning Model:', zoo_model_p)
-
-    # Mean error and Standard Deviation of Zoo Data Without Pruning
-    zoo_mean_error = np.mean(zoo_err, 0)
-    zoo_std_error = np.std(zoo_err, 0)
     print("Zoo Mean Error Without Pruning: ", zoo_mean_error)
     print("Zoo STD Error Without Pruning: ", zoo_std_error)
-
     print(DIVIDER)
     print("I am pruned")
     print(DIVIDER)
-
-    # Mean error and Standard Deviation of Zoo Data With Pruning
-    zoo_mean_error_prune = np.mean(zoo_err_p, 0)
-    zoo_std_error_prune = np.std(zoo_err_p, 0)
     print("Zoo Mean Error With Pruning: ", zoo_mean_error_prune)
     print("Zoo STD Error With Pruning: ", zoo_std_error_prune)
 
