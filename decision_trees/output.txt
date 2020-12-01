@@ -1,90 +1,86 @@
-Script started on 2020-12-01 14:53:57-08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
-(base) ]0;namiel@pop-os: ~/Documents/CS550/a4/Decision-Tree/decision_trees[01;32mnamiel@pop-os[00m:[01;34m~/Documents/CS550/a4/Decision-Tree/decision_trees[00m$ python3  driver.py
 -------------------------------------------------------------------------------------------------------------
 MUSHROOM
 -------------------------------------------------------------------------------------------------------------
 Printing Unpruned Tree:
-odor Chi2=7.000 split (3801,3511) on values n, p, c, s, y, l, a, f, m
-n -> spore-print-color Chi2=7.000 split (3082,106) on values n, h, r, y, o, b, w, u, k
-    n -> e is predicted
-    h -> e is predicted
-    r -> p is predicted
-    y -> e is predicted
-    o -> e is predicted
-    b -> e is predicted
-    w -> habitat Chi2=7.000 split (522,40) on values p, d, l, g, w, m, u
-        p -> e is predicted
-        d -> gill-size Chi2=7.000 split (8,26) on values n, b
-            n -> p is predicted
-            b -> e is predicted
-        l -> cap-color Chi2=7.000 split (45,14) on values e, n, p, c, r, y, b, w, g, u
-            e -> e is predicted
-            n -> e is predicted
-            p -> e is predicted
-            c -> e is predicted
-            r -> e is predicted
-            y -> p is predicted
-            b -> e is predicted
-            w -> p is predicted
-            g -> e is predicted
-            u -> e is predicted
-        g -> e is predicted
-        w -> e is predicted
-        m -> e is predicted
-        u -> e is predicted
-    u -> e is predicted
-    k -> e is predicted
-p -> p is predicted
+odor Chi2=6.000 split (3543,3769) on values c, s, f, l, a, y, m, p, n
 c -> p is predicted
 s -> p is predicted
-y -> p is predicted
+f -> p is predicted
 l -> e is predicted
 a -> e is predicted
-f -> p is predicted
+y -> p is predicted
 m -> p is predicted
+p -> p is predicted
+n -> spore-print-color Chi2=6.000 split (104,3033) on values k, w, b, y, h, n, o, u, r
+    k -> e is predicted
+    w -> habitat Chi2=6.000 split (40,519) on values w, g, l, m, p, u, d
+        w -> e is predicted
+        g -> e is predicted
+        l -> cap-color Chi2=6.000 split (12,39) on values w, g, b, c, y, p, n, u, r, e
+            w -> p is predicted
+            g -> e is predicted
+            b -> e is predicted
+            c -> e is predicted
+            y -> p is predicted
+            p -> e is predicted
+            n -> e is predicted
+            u -> e is predicted
+            r -> e is predicted
+            e -> e is predicted
+        m -> e is predicted
+        p -> e is predicted
+        u -> e is predicted
+        d -> gill-size Chi2=6.000 split (28,8) on values b, n
+            b -> e is predicted
+            n -> p is predicted
+    b -> e is predicted
+    y -> e is predicted
+    h -> e is predicted
+    n -> e is predicted
+    o -> e is predicted
+    u -> e is predicted
+    r -> p is predicted
 Mushroom err: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-Mushroom Model: [DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'})]
 Printing Pruned Tree:
-odor Chi2=7.000 split (3784,3528) on values n, p, c, s, y, l, a, f, m
-n -> spore-print-color Chi2=7.000 split (3076,106) on values n, h, r, y, o, b, w, u, k
-    n -> e is predicted
-    h -> e is predicted
-    r -> p is predicted
-    y -> e is predicted
-    o -> e is predicted
-    b -> e is predicted
-    w -> habitat Chi2=7.000 split (520,44) on values p, d, l, g, w, m, u
-        p -> e is predicted
-        d -> gill-size Chi2=7.000 split (6,29) on values n, b
-            n -> p is predicted
-            b -> e is predicted
-        l -> cap-color Chi2=7.000 split (44,15) on values e, n, p, c, r, y, b, w, g, u
-            e -> e is predicted
-            n -> e is predicted
-            p -> e is predicted
-            c -> e is predicted
-            r -> e is predicted
-            y -> p is predicted
-            b -> e is predicted
-            w -> p is predicted
-            g -> e is predicted
-            u -> e is predicted
-        g -> e is predicted
-        w -> e is predicted
-        m -> e is predicted
-        u -> e is predicted
-    u -> e is predicted
-    k -> e is predicted
-p -> p is predicted
+odor Chi2=6.000 split (3504,3808) on values c, s, f, l, a, y, m, p, n
 c -> p is predicted
 s -> p is predicted
-y -> p is predicted
+f -> p is predicted
 l -> e is predicted
 a -> e is predicted
-f -> p is predicted
+y -> p is predicted
 m -> p is predicted
+p -> p is predicted
+n -> spore-print-color Chi2=6.000 split (109,3077) on values k, w, b, y, h, n, o, u, r
+    k -> e is predicted
+    w -> habitat Chi2=6.000 split (44,521) on values w, g, l, m, p, u, d
+        w -> e is predicted
+        g -> e is predicted
+        l -> cap-color Chi2=6.000 split (15,43) on values w, g, b, c, y, p, n, u, r, e
+            w -> p is predicted
+            g -> e is predicted
+            b -> e is predicted
+            c -> e is predicted
+            y -> p is predicted
+            p -> e is predicted
+            n -> e is predicted
+            u -> e is predicted
+            r -> e is predicted
+            e -> e is predicted
+        m -> e is predicted
+        p -> e is predicted
+        u -> e is predicted
+        d -> gill-size Chi2=6.000 split (29,8) on values b, n
+            b -> e is predicted
+            n -> p is predicted
+    b -> e is predicted
+    y -> e is predicted
+    h -> e is predicted
+    n -> e is predicted
+    o -> e is predicted
+    u -> e is predicted
+    r -> p is predicted
 Mushroom with pruning err: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-Mushroom with pruning Model: [DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'}), DecisionFork(5, 'odor', {'n': DecisionFork(20, 'spore-print-color', {'n': 'e', 'h': 'e', 'r': 'p', 'y': 'e', 'o': 'e', 'b': 'e', 'w': DecisionFork(22, 'habitat', {'p': 'e', 'd': DecisionFork(8, 'gill-size', {'n': 'p', 'b': 'e'}), 'l': DecisionFork(3, 'cap-color', {'e': 'e', 'n': 'e', 'p': 'e', 'c': 'e', 'r': 'e', 'y': 'p', 'b': 'e', 'w': 'p', 'g': 'e', 'u': 'e'}), 'g': 'e', 'w': 'e', 'm': 'e', 'u': 'e'}), 'u': 'e', 'k': 'e'}), 'p': 'p', 'c': 'p', 's': 'p', 'y': 'p', 'l': 'e', 'a': 'e', 'f': 'p', 'm': 'p'})]
 Mushroom Mean Error Without Pruning:  0.0
 Mushroom STD Error Without Pruning:  0.0
 -------------------------------------------------------------------------------------------------------------
@@ -96,58 +92,51 @@ Mushroom STD Error With Pruning:  0.0
 ZOO
 -------------------------------------------------------------------------------------------------------------
 Printing Unpruned Tree:
-legs Chi2=7.000 split (9,12,3,18,8,36,5) on values 0, 2, 4, 5, 6, 8
-0 -> fins Chi2=7.000 split (4,12,0,0,0,3,3) on values 0, 1
-    0 -> toothed Chi2=7.000 split (4,0,0,0,0,0,3) on values 0, 1
+legs Chi2=6.000 split (5,17,38,4,8,13,6) on values 0, 2, 4, 5, 6, 8
+0 -> fins Chi2=6.000 split (3,0,3,0,3,13,0) on values 0, 1
+    0 -> toothed Chi2=6.000 split (3,0,0,0,3,0,0) on values 0, 1
         0 -> shellfish is predicted
         1 -> reptile is predicted
-    1 -> eggs Chi2=7.000 split (0,12,0,0,0,3,0) on values 0, 1
+    1 -> eggs Chi2=6.000 split (0,0,3,0,0,13,0) on values 0, 1
         0 -> mammal is predicted
         1 -> fish is predicted
-2 -> hair Chi2=7.000 split (0,0,0,18,0,6,0) on values 0, 1
+2 -> hair Chi2=6.000 split (0,17,7,0,0,0,0) on values 0, 1
     0 -> bird is predicted
     1 -> mammal is predicted
-4 -> hair Chi2=7.000 split (1,0,3,0,0,27,2) on values 0, 1
-    0 -> aquatic Chi2=7.000 split (1,0,3,0,0,0,2) on values 0, 1
+4 -> hair Chi2=6.000 split (2,0,28,4,0,0,0) on values 0, 1
+    0 -> aquatic Chi2=6.000 split (2,0,0,4,0,0,0) on values 0, 1
         0 -> reptile is predicted
-        1 -> toothed Chi2=7.000 split (1,0,3,0,0,0,0) on values 0, 1
-            0 -> shellfish is predicted
-            1 -> amphibian is predicted
+        1 -> amphibian is predicted
     1 -> mammal is predicted
 5 -> shellfish is predicted
-6 -> aquatic Chi2=7.000 split (1,0,0,0,8,0,0) on values 0, 1
+6 -> aquatic Chi2=6.000 split (0,0,0,0,2,0,6) on values 0, 1
     0 -> insect is predicted
     1 -> shellfish is predicted
 8 -> shellfish is predicted
-Zoo err: [0.0, 0.0, 0.09999999999999998, 0.19999999999999996, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-Zoo Model: [DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(8, 'toothed', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'shellfish'}), 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'mammal', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'reptile'}), 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: DecisionFork(8, 'toothed', {0: 'shellfish', 1: 'amphibian'})}), 1: 'mammal'}), 5: 'shellfish', 6: DecisionFork(6, 'aquatic', {0: 'insect', 1: 'shellfish'}), 8: 'shellfish'})]
+Zoo err: [0.09999999999999998, 0.09999999999999998, 0.09999999999999998, 0.0, 0.0, 0.0, 0.0, 0.19999999999999996, 0.0, 0.0]
 Printing pruned Tree:
-legs Chi2=7.000 split (10,10,3,19,8,36,5) on values 0, 2, 4, 5, 6, 8
-0 -> fins Chi2=7.000 split (4,10,0,0,0,3,3) on values 0, 1
+legs Chi2=6.000 split (4,19,36,4,8,12,8) on values 0, 2, 4, 5, 6, 8
+0 -> fins Chi2=6.000 split (3,0,3,0,3,12,0) on values 0, 1
     0 -> shellfish is predicted
-    1 -> eggs Chi2=7.000 split (0,10,0,0,0,3,0) on values 0, 1
+    1 -> eggs Chi2=6.000 split (0,0,3,0,0,12,0) on values 0, 1
         0 -> mammal is predicted
         1 -> fish is predicted
-2 -> hair Chi2=7.000 split (0,0,0,19,0,6,0) on values 0, 1
+2 -> hair Chi2=6.000 split (0,19,7,0,0,0,0) on values 0, 1
     0 -> bird is predicted
     1 -> mammal is predicted
-4 -> hair Chi2=7.000 split (1,0,3,0,0,27,2) on values 0, 1
-    0 -> aquatic Chi2=7.000 split (1,0,3,0,0,0,2) on values 0, 1
+4 -> hair Chi2=6.000 split (1,0,26,4,1,0,0) on values 0, 1
+    0 -> aquatic Chi2=6.000 split (1,0,0,4,1,0,0) on values 0, 1
         0 -> reptile is predicted
         1 -> amphibian is predicted
     1 -> mammal is predicted
 5 -> shellfish is predicted
 6 -> insect is predicted
 8 -> shellfish is predicted
-Zoo with pruning err: [0.0, 0.09999999999999998, 0.0, 0.4, 0.30000000000000004, 0.0, 0.19999999999999996, 0.4, 0.0, 0.09999999999999998]
-Zoo with pruning Model: [DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: 'fish'}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'amphibian'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'mammal'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: DecisionFork(3, 'eggs', {0: 'reptile', 1: 'shellfish'}), 1: 'shellfish'}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(10, 'breathes', {0: 'fish', 1: DecisionFork(3, 'eggs', {0: 'shellfish', 1: DecisionFork(7, 'predator', {0: 'shellfish', 1: 'reptile'})})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'shellfish', 6: 'insect', 8: 'shellfish'}), DecisionFork(13, 'legs', {0: DecisionFork(12, 'fins', {0: 'shellfish', 1: DecisionFork(3, 'eggs', {0: 'mammal', 1: 'fish'})}), 2: DecisionFork(1, 'hair', {0: 'bird', 1: 'mammal'}), 4: DecisionFork(1, 'hair', {0: DecisionFork(6, 'aquatic', {0: 'reptile', 1: 'amphibian'}), 1: 'mammal'}), 5: 'mammal', 6: 'insect', 8: 'shellfish'})]
-Zoo Mean Error Without Pruning:  0.029999999999999992
-Zoo STD Error Without Pruning:  0.06403124237432847
+Zoo with pruning err: [0.0, 0.09999999999999998, 0.5, 0.19999999999999996, 0.09999999999999998, 0.0, 0.0, 0.4, 0.09999999999999998, 0.0]
+Zoo Mean Error Without Pruning:  0.04999999999999999
+Zoo STD Error Without Pruning:  0.06708203932499368
 -------------------------------------------------------------------------------------------------------------
 I am pruned
 -------------------------------------------------------------------------------------------------------------
-Zoo Mean Error With Pruning:  0.15
-Zoo STD Error With Pruning:  0.15652475842498528
-(base) ]0;namiel@pop-os: ~/Documents/CS550/a4/Decision-Tree/decision_trees[01;32mnamiel@pop-os[00m:[01;34m~/Documents/CS550/a4/Decision-Tree/decision_trees[00m$ exit
-
-Script done on 2020-12-01 14:54:15-08:00 [COMMAND_EXIT_CODE="0"]
+Zoo Mean Error With Pruning:  0.13999999999999999
+Zoo STD Error With Pruning:  0.16852299546352717
