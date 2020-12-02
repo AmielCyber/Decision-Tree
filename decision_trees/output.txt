@@ -2,84 +2,84 @@
 MUSHROOM
 -------------------------------------------------------------------------------------------------------------
 Printing Unpruned Tree:
-odor Chi2=6.000 split (3543,3769) on values c, s, f, l, a, y, m, p, n
-c -> p is predicted
-s -> p is predicted
-f -> p is predicted
-l -> e is predicted
-a -> e is predicted
-y -> p is predicted
-m -> p is predicted
+odor Chi2=6890.356 split (3525,3787) on values p, f, a, m, n, c, l, y, s
 p -> p is predicted
-n -> spore-print-color Chi2=6.000 split (104,3033) on values k, w, b, y, h, n, o, u, r
+f -> p is predicted
+a -> e is predicted
+m -> p is predicted
+n -> spore-print-color Chi2=1936.008 split (109,3081) on values n, k, h, u, o, r, b, w, y
+    n -> e is predicted
     k -> e is predicted
-    w -> habitat Chi2=6.000 split (40,519) on values w, g, l, m, p, u, d
-        w -> e is predicted
-        g -> e is predicted
-        l -> cap-color Chi2=6.000 split (12,39) on values w, g, b, c, y, p, n, u, r, e
-            w -> p is predicted
-            g -> e is predicted
-            b -> e is predicted
-            c -> e is predicted
-            y -> p is predicted
-            p -> e is predicted
-            n -> e is predicted
-            u -> e is predicted
-            r -> e is predicted
-            e -> e is predicted
+    h -> e is predicted
+    u -> e is predicted
+    o -> e is predicted
+    r -> p is predicted
+    b -> e is predicted
+    w -> habitat Chi2=317.357 split (45,515) on values m, p, u, g, l, w, d
         m -> e is predicted
         p -> e is predicted
         u -> e is predicted
-        d -> gill-size Chi2=6.000 split (28,8) on values b, n
+        g -> e is predicted
+        l -> cap-color Chi2=59.000 split (16,43) on values p, n, e, g, u, c, r, b, w, y
+            p -> e is predicted
+            n -> e is predicted
+            e -> e is predicted
+            g -> e is predicted
+            u -> e is predicted
+            c -> e is predicted
+            r -> e is predicted
             b -> e is predicted
+            w -> p is predicted
+            y -> p is predicted
+        w -> e is predicted
+        d -> gill-size Chi2=37.000 split (29,8) on values n, b
             n -> p is predicted
-    b -> e is predicted
+            b -> e is predicted
     y -> e is predicted
-    h -> e is predicted
-    n -> e is predicted
-    o -> e is predicted
-    u -> e is predicted
-    r -> p is predicted
+c -> p is predicted
+l -> e is predicted
+y -> p is predicted
+s -> p is predicted
 Mushroom err: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 Printing Pruned Tree:
-odor Chi2=6.000 split (3504,3808) on values c, s, f, l, a, y, m, p, n
-c -> p is predicted
-s -> p is predicted
-f -> p is predicted
-l -> e is predicted
-a -> e is predicted
-y -> p is predicted
-m -> p is predicted
+odor Chi2=6897.975 split (3525,3787) on values p, f, a, m, n, c, l, y, s
 p -> p is predicted
-n -> spore-print-color Chi2=6.000 split (109,3077) on values k, w, b, y, h, n, o, u, r
+f -> p is predicted
+a -> e is predicted
+m -> p is predicted
+n -> spore-print-color Chi2=1919.020 split (107,3050) on values n, k, h, u, o, r, b, w, y
+    n -> e is predicted
     k -> e is predicted
-    w -> habitat Chi2=6.000 split (44,521) on values w, g, l, m, p, u, d
-        w -> e is predicted
-        g -> e is predicted
-        l -> cap-color Chi2=6.000 split (15,43) on values w, g, b, c, y, p, n, u, r, e
-            w -> p is predicted
-            g -> e is predicted
-            b -> e is predicted
-            c -> e is predicted
-            y -> p is predicted
-            p -> e is predicted
-            n -> e is predicted
-            u -> e is predicted
-            r -> e is predicted
-            e -> e is predicted
+    h -> e is predicted
+    u -> e is predicted
+    o -> e is predicted
+    r -> p is predicted
+    b -> e is predicted
+    w -> habitat Chi2=346.836 split (44,515) on values m, p, u, g, l, w, d
         m -> e is predicted
         p -> e is predicted
         u -> e is predicted
-        d -> gill-size Chi2=6.000 split (29,8) on values b, n
+        g -> e is predicted
+        l -> cap-color Chi2=58.000 split (15,43) on values p, n, e, g, u, c, r, b, w, y
+            p -> e is predicted
+            n -> e is predicted
+            e -> e is predicted
+            g -> e is predicted
+            u -> e is predicted
+            c -> e is predicted
+            r -> e is predicted
             b -> e is predicted
+            w -> p is predicted
+            y -> p is predicted
+        w -> e is predicted
+        d -> gill-size Chi2=34.000 split (29,5) on values n, b
             n -> p is predicted
-    b -> e is predicted
+            b -> e is predicted
     y -> e is predicted
-    h -> e is predicted
-    n -> e is predicted
-    o -> e is predicted
-    u -> e is predicted
-    r -> p is predicted
+c -> p is predicted
+l -> e is predicted
+y -> p is predicted
+s -> p is predicted
 Mushroom with pruning err: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 Mushroom Mean Error Without Pruning:  0.0
 Mushroom STD Error Without Pruning:  0.0
@@ -92,51 +92,53 @@ Mushroom STD Error With Pruning:  0.0
 ZOO
 -------------------------------------------------------------------------------------------------------------
 Printing Unpruned Tree:
-legs Chi2=6.000 split (5,17,38,4,8,13,6) on values 0, 2, 4, 5, 6, 8
-0 -> fins Chi2=6.000 split (3,0,3,0,3,13,0) on values 0, 1
-    0 -> toothed Chi2=6.000 split (3,0,0,0,3,0,0) on values 0, 1
-        0 -> shellfish is predicted
-        1 -> reptile is predicted
-    1 -> eggs Chi2=6.000 split (0,0,3,0,0,13,0) on values 0, 1
+legs Chi2=213.035 split (7,16,4,3,13,10,38) on values 0, 2, 4, 5, 6, 8
+0 -> fins Chi2=21.000 split (0,0,0,1,13,4,3) on values 0, 1
+    0 -> eggs Chi2=5.000 split (0,0,0,1,0,4,0) on values 0, 1
+        0 -> reptile is predicted
+        1 -> shellfish is predicted
+    1 -> eggs Chi2=16.000 split (0,0,0,0,13,0,3) on values 0, 1
         0 -> mammal is predicted
         1 -> fish is predicted
-2 -> hair Chi2=6.000 split (0,17,7,0,0,0,0) on values 0, 1
+2 -> hair Chi2=23.000 split (0,16,0,0,0,0,7) on values 0, 1
     0 -> bird is predicted
     1 -> mammal is predicted
-4 -> hair Chi2=6.000 split (2,0,28,4,0,0,0) on values 0, 1
-    0 -> aquatic Chi2=6.000 split (2,0,0,4,0,0,0) on values 0, 1
+4 -> hair Chi2=35.000 split (0,0,4,2,0,1,28) on values 0, 1
+    0 -> aquatic Chi2=7.000 split (0,0,4,2,0,1,0) on values 0, 1
         0 -> reptile is predicted
-        1 -> amphibian is predicted
+        1 -> toothed Chi2=5.000 split (0,0,4,0,0,1,0) on values 0, 1
+            0 -> shellfish is predicted
+            1 -> amphibian is predicted
     1 -> mammal is predicted
 5 -> shellfish is predicted
-6 -> aquatic Chi2=6.000 split (0,0,0,0,2,0,6) on values 0, 1
+6 -> aquatic Chi2=9.000 split (7,0,0,0,0,2,0) on values 0, 1
     0 -> insect is predicted
     1 -> shellfish is predicted
 8 -> shellfish is predicted
-Zoo err: [0.09999999999999998, 0.09999999999999998, 0.09999999999999998, 0.0, 0.0, 0.0, 0.0, 0.19999999999999996, 0.0, 0.0]
+Zoo err: [0.19999999999999996, 0.19999999999999996, 0.0, 0.09999999999999998, 0.0, 0.0, 0.19999999999999996, 0.0, 0.09999999999999998, 0.0]
 Printing pruned Tree:
-legs Chi2=6.000 split (4,19,36,4,8,12,8) on values 0, 2, 4, 5, 6, 8
-0 -> fins Chi2=6.000 split (3,0,3,0,3,12,0) on values 0, 1
+legs Chi2=220.827 split (8,16,2,5,12,9,39) on values 0, 2, 4, 5, 6, 8
+0 -> fins Chi2=22.000 split (0,0,0,3,12,4,3) on values 0, 1
     0 -> shellfish is predicted
-    1 -> eggs Chi2=6.000 split (0,0,3,0,0,12,0) on values 0, 1
+    1 -> eggs Chi2=15.000 split (0,0,0,0,12,0,3) on values 0, 1
         0 -> mammal is predicted
         1 -> fish is predicted
-2 -> hair Chi2=6.000 split (0,19,7,0,0,0,0) on values 0, 1
+2 -> hair Chi2=22.000 split (0,16,0,0,0,0,6) on values 0, 1
     0 -> bird is predicted
     1 -> mammal is predicted
-4 -> hair Chi2=6.000 split (1,0,26,4,1,0,0) on values 0, 1
-    0 -> aquatic Chi2=6.000 split (1,0,0,4,1,0,0) on values 0, 1
+4 -> hair Chi2=60.000 split (0,0,2,2,0,0,30) on values 0, 1
+    0 -> aquatic Chi2=4.000 split (0,0,2,2,0,0,0) on values 0, 1
         0 -> reptile is predicted
         1 -> amphibian is predicted
-    1 -> mammal is predicted
+    1 -> amphibian is predicted
 5 -> shellfish is predicted
 6 -> insect is predicted
 8 -> shellfish is predicted
-Zoo with pruning err: [0.0, 0.09999999999999998, 0.5, 0.19999999999999996, 0.09999999999999998, 0.0, 0.0, 0.4, 0.09999999999999998, 0.0]
-Zoo Mean Error Without Pruning:  0.04999999999999999
-Zoo STD Error Without Pruning:  0.06708203932499368
+Zoo with pruning err: [0.19999999999999996, 0.09999999999999998, 0.0, 0.0, 0.19999999999999996, 0.0, 0.0, 0.09999999999999998, 0.0, 0.30000000000000004]
+Zoo Mean Error Without Pruning:  0.07999999999999999
+Zoo STD Error Without Pruning:  0.08717797887081345
 -------------------------------------------------------------------------------------------------------------
 I am pruned
 -------------------------------------------------------------------------------------------------------------
-Zoo Mean Error With Pruning:  0.13999999999999999
-Zoo STD Error With Pruning:  0.16852299546352717
+Zoo Mean Error With Pruning:  0.09
+Zoo STD Error With Pruning:  0.10440306508910549
