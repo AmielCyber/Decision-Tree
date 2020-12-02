@@ -54,8 +54,10 @@ class DecisionTreeLearner:
         # -----------------------------------------------------------------
 
         self.debug = debug
-
+        # Set the p_value to see if we have to prune
         self.p_value = p_value
+
+        # Prune the tree after is done making the tree if p_value was passed
         self.prune(self.p_value)
 
 
@@ -253,8 +255,11 @@ class DecisionTreeLearner:
         and DecisionFork only contains DecisionLeaf children, after
         pruning, it is examined for pruning as well.
         """
+
         if self.p_value:
+            # If p_value was passed to prune when this object was initiated
             self.prune_aux(p_value, self.tree, None)
+            # Set p_value to None so we do not do another prune like in cross_validation
             self.p_value = None
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
