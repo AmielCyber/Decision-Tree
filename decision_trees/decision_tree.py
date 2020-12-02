@@ -385,15 +385,11 @@ class DecisionTreeLearner:
                     p_k_dev = ((p_k[index] - p_hat) ** 2) / p_hat   # ((p_k - p_hat)^2)/p_hat
                 delta += p_k_dev                                    # Increment delta
 
-        # Set our delta value in the chi2 result
-        self.chi2_result.value = delta
-        # Determine if leaves are irrelevant
-        similar = False
-        if self.chi2_result.value < threshold_inverse_cdf:
-            similar = True
-        self.chi2_result.similar = similar
+        # Check if the distribution is similar
+        similar = delta < threshold_inverse_cdf
 
-        return self.chi2_result
+        # Set our new chi2_result and return value
+        return self.chi2_result(delta, similar)
 
     def neg_dist(self, list_dist):
         size = sum(list_dist)
