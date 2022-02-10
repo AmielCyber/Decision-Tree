@@ -9,3 +9,5 @@ decision_trees/ml_lib/__pycache__/utils.cpython-38.pyc
 decision_trees/.idea/inspectionProfiles/profiles_settings.xml
 decision_trees/__pycache__/decision_tree.cpython-38.pyc
 *.pyc
+.DS_Store
+.idea
